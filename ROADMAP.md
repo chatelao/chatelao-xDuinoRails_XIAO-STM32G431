@@ -28,7 +28,7 @@ This document outlines the steps to take the XIAO STM32G431 project from its cur
 - [ ] **Gerber Files**: Generate Gerber files (Copper, Solder Mask, Silkscreen, Drill, Edge Cuts).
 - [ ] **Drill Files**: Generate Excellon drill files.
 - [ ] **Assembly Files (PCBA)**:
-    - **BOM (Bill of Materials)**: Export BOM including LCSC part numbers. Format as required by JLCPCB.
+    - **BOM (Bill of Materials)**: Export BOM including LCSC part numbers. Format as required by JLCPCB. See [PARTLIST.md](hardware/PARTLIST.md) for selected parts.
     - **CPL (Component Placement List)**: Export Pick and Place file. Format as required by JLCPCB (Designator, Mid X, Mid Y, Layer, Rotation).
 - [ ] **3D Viewer Check**: Verify component alignment and footprint orientation.
 
