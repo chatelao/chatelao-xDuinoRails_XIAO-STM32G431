@@ -7,7 +7,10 @@
 #define MICROPY_HW_ENABLE_DAC       (0) // Disable DAC to save space
 #define MICROPY_HW_ENABLE_USB       (1)
 #define MICROPY_HW_HAS_SWITCH       (0)
-#define MICROPY_HW_HAS_FLASH        (1) // Internal flash
+#define MICROPY_HW_HAS_FLASH        (1) // Internal flash present
+
+// Disable internal storage as we don't have space in linker script
+#define MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE (0)
 
 // Minimal build settings to fit 128KB
 #define MICROPY_ENABLE_COMPILER     (1) // Keep compiler for REPL
@@ -29,6 +32,11 @@
 #define MICROPY_PY_MACHINE          (1)
 #define MICROPY_PY_UCTYPES          (0)
 #define MICROPY_PY_THREAD           (0)
+
+// Disable machine features to fix build and save space
+#define MICROPY_PY_MACHINE_IDLE     (0)
+#define MICROPY_PY_MACHINE_PULSE    (0)
+#define MICROPY_PY_LWIP             (0)
 
 // Disable floats to save space and match MICROPY_FLOAT_IMPL=none
 #define MICROPY_PY_BUILTINS_FLOAT   (0)
