@@ -18,7 +18,7 @@ This document lists the components used in the XIAO STM32G431 hardware design, b
 | R3, R4 | 10k | Resistor, 0402 | Resistor_SMD:R_0402_1005Metric | 2 | C25744 | Pull-ups/downs |
 | R5, R6 | 1k | Resistor, 0402 | Resistor_SMD:R_0402_1005Metric | 2 | C11702 | LED limiting |
 | R7, R8 | 22 | Resistor, 0402 | Resistor_SMD:R_0402_1005Metric | 2 | C25092 | USB Series |
-| J2, J3 | CONN_01X07 | Pin Header, 1x7, 2.54mm | Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical | 2 | - | |
+| J2, J3 | CONN_01X07 | Pin Header, 1x7, 2.54mm | PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical | 2 | - | |
 
 ## Design Choices & Comparison
 
