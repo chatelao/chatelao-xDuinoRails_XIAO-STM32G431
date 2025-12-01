@@ -34,8 +34,14 @@
 #define MICROPY_PY_THREAD           (0)
 
 // Disable machine features to fix build and save space
+// We must undefine them first in case they were enabled in port defaults
+#undef MICROPY_PY_MACHINE_IDLE
 #define MICROPY_PY_MACHINE_IDLE     (0)
+
+#undef MICROPY_PY_MACHINE_PULSE
 #define MICROPY_PY_MACHINE_PULSE    (0)
+
+#undef MICROPY_PY_LWIP
 #define MICROPY_PY_LWIP             (0)
 
 // Disable floats to save space and match MICROPY_FLOAT_IMPL=none
