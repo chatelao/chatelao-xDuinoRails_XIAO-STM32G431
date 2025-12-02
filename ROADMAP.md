@@ -3,7 +3,7 @@
 This document outlines the steps to take the XIAO STM32G431 project from its current state to manufacturing at JLCPCB.
 
 ## Phase 1: Schematic Design
-- [ ] **Analyze Netlist**: Review `hardware/xiao_stm32g431.net` to understand the intended connectivity.
+- [x] **Analyze Netlist**: Review `hardware/xiao_stm32g431.net` to understand the intended connectivity. (Fixed pin mapping to match Proposal).
 - [ ] **Create KiCad Project**: Initialize a new KiCad project (`.kicad_pro`).
 - [ ] **Schematic Capture**: Create the schematic (`.kicad_sch`) based on the netlist.
     - Verify pinouts for STM32G431.
