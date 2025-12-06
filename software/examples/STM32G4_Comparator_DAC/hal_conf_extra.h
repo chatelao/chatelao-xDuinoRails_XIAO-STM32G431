@@ -1,0 +1,7 @@
+#ifndef HAL_CONF_EXTRA_H
+#define HAL_CONF_EXTRA_H
+
+#define HAL_COMP_MODULE_ENABLED
+#define HAL_DAC_MODULE_ENABLED
+
+#endif

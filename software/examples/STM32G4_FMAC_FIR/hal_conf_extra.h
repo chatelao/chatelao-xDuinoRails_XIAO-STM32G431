@@ -1,0 +1,6 @@
+#ifndef HAL_CONF_EXTRA_H
+#define HAL_CONF_EXTRA_H
+
+#define HAL_FMAC_MODULE_ENABLED
+
+#endif
