@@ -65,10 +65,10 @@ void loop() {
   static float angle = 0;
 
   // 1. Generate Input Vector (Cartesian)
-  // Radius = 0.8 (Must be < 1.0 for q1.31 CORDIC limits if we don't scale)
-  // Note: Modulus can grow > 1 during calculation, but CORDIC handles up to ~1.6?
-  // Safe range for inputs is [-1, 1].
-  float radius = 0.8;
+  // Radius = 0.5 (Must be kept low because CORDIC Modulus adds gain ~1.647)
+  // With Radius 0.8: 0.8 * 1.647 = ~1.31 which overflows q1.31 range [-1, 1)
+  // With Radius 0.5: 0.5 * 1.647 = ~0.82 which is safe.
+  float radius = 0.5;
   float x_float = radius * cos(angle);
   float y_float = radius * sin(angle);
 
