@@ -14,6 +14,10 @@ This document outlines the steps to take the XIAO STM32G431 project from its cur
     - Assign LCSC Part Numbers (e.g., `C12345`) to a custom field (e.g., `LCSC`) in KiCad symbols.
 - [ ] **ERC (Electrical Rules Check)**: Run KiCad ERC to catch electrical errors.
 
+## Software
+- [x] **Arduino Examples**: Created examples for OpAmp, Comparator, CORDIC (SinCos/Polar), and FMAC (FIR).
+- [x] **CI/CD Pipeline**: Configured GitHub Actions to compile examples on push and publish firmware on release.
+
 ## Phase 2: PCB Layout
 - [ ] **Board Setup**: Define board outline and constraints (min track width, clearance, via sizes) matching JLCPCB capabilities.
     - *Reference*: [JLCPCB Capabilities](https://jlcpcb.com/capabilities/Capabilities)
