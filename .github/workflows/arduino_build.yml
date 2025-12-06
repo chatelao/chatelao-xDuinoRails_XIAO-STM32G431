@@ -1,0 +1,61 @@
+name: Arduino Build
+
+on:
+  push:
+    paths:
+      - 'software/examples/**'
+      - '.github/workflows/arduino_build.yml'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v1.1.2
+
+      - name: Install STM32 Core
+        run: |
+          arduino-cli config init
+          arduino-cli core update-index --additional-urls https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+          arduino-cli core install STMicroelectronics:stm32 --additional-urls https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+
+      - name: Compile Examples
+        run: |
+          mkdir build_artifacts
+          for d in software/examples/*/; do
+            if [ -d "$d" ]; then
+              sketch_name=$(basename "$d")
+              echo "Compiling $sketch_name..."
+              # Use Generic G431KBUx with USB CDC enabled (XIAO typical config)
+              arduino-cli compile --fqbn STMicroelectronics:stm32:GenG4:pnum=GENERIC_G431KBUX,usb=CDCgen,xusb=FS --output-dir build_output "$d"
+
+              # Copy hex to artifacts folder with sketch name
+              if [ -f "build_output/$sketch_name.ino.hex" ]; then
+                cp "build_output/$sketch_name.ino.hex" "build_artifacts/${sketch_name}.hex"
+                echo "Generated build_artifacts/${sketch_name}.hex"
+              elif [ -f "build_output/$sketch_name.ino.elf" ]; then
+                 # Fallback if hex not generated (rare for STM32 core default)
+                 echo "Warning: No .hex file found for $sketch_name"
+              fi
+
+              # Cleanup build output for next iteration
+              rm -rf build_output
+            fi
+          done
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware-hex
+          path: build_artifacts/*.hex
+
+      - name: Publish Firmware to Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build_artifacts/*.hex
