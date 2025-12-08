@@ -44,7 +44,7 @@ const int16_t aCoeffB[FILTER_TAP_NUM] = {
 int16_t aInputData[DATA_SIZE];
 int16_t aOutputData[DATA_SIZE];
 
-void Error_Handler() {
+void Example_Error_Handler() {
   Serial.println("Error encountered!");
   while(1) delay(100);
 }
@@ -59,7 +59,7 @@ void setup() {
 
   // --- 2. Initialize FMAC ---
   hfmac.Instance = FMAC;
-  if (HAL_FMAC_Init(&hfmac) != HAL_OK) Error_Handler();
+  if (HAL_FMAC_Init(&hfmac) != HAL_OK) Example_Error_Handler();
 
   // --- 3. Configure Filter ---
   FMAC_FilterConfigTypeDef sFmacConfig = {0};
@@ -96,10 +96,10 @@ void setup() {
   sFmacConfig.Q = 0;
   sFmacConfig.R = 0;
 
-  if (HAL_FMAC_ConfigFilter(&hfmac, &sFmacConfig) != HAL_OK) Error_Handler();
+  if (HAL_FMAC_ConfigFilter(&hfmac, &sFmacConfig) != HAL_OK) Example_Error_Handler();
 
   // --- 4. Start Filter ---
-  if (HAL_FMAC_Start(&hfmac) != HAL_OK) Error_Handler();
+  if (HAL_FMAC_Start(&hfmac) != HAL_OK) Example_Error_Handler();
 
   Serial.println("FMAC Configured and Started.");
   Serial.println("Processing Impulse Response...");
@@ -114,12 +114,12 @@ void setup() {
   // --- 6. Process Data (Polling) ---
 
   // Set the output buffer pointer for HAL
-  if (HAL_FMAC_ConfigFilterOutputBuffer(&hfmac, aOutputData, DATA_SIZE) != HAL_OK) Error_Handler();
+  if (HAL_FMAC_ConfigFilterOutputBuffer(&hfmac, aOutputData, DATA_SIZE) != HAL_OK) Example_Error_Handler();
 
   // Push input data to FMAC
   uint32_t len = DATA_SIZE;
   // This copies data into FMAC internal memory (X2)
-  if (HAL_FMAC_AppendFilterData(&hfmac, aInputData, &len) != HAL_OK) Error_Handler();
+  if (HAL_FMAC_AppendFilterData(&hfmac, aInputData, &len) != HAL_OK) Example_Error_Handler();
 
   // Poll until processing is complete
   // The HAL will read data from FMAC Y buffer into aOutputData

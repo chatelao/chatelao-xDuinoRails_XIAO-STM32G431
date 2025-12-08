@@ -31,7 +31,7 @@
 
 CORDIC_HandleTypeDef hcordic;
 
-void Error_Handler() {
+void Example_Error_Handler() {
   Serial.println("Error encountered!");
   while(1) delay(100);
 }
@@ -59,7 +59,7 @@ void setup() {
 
   // --- 2. Initialize CORDIC ---
   hcordic.Instance = CORDIC;
-  if (HAL_CORDIC_Init(&hcordic) != HAL_OK) Error_Handler();
+  if (HAL_CORDIC_Init(&hcordic) != HAL_OK) Example_Error_Handler();
 
   // --- 3. Configure CORDIC for Modulus (Polar) ---
   CORDIC_ConfigTypeDef sConfig = {0};
@@ -71,7 +71,7 @@ void setup() {
   sConfig.InSize = CORDIC_INSIZE_32BITS;
   sConfig.OutSize = CORDIC_OUTSIZE_32BITS;
 
-  if (HAL_CORDIC_Configure(&hcordic, &sConfig) != HAL_OK) Error_Handler();
+  if (HAL_CORDIC_Configure(&hcordic, &sConfig) != HAL_OK) Example_Error_Handler();
 
   Serial.println("CORDIC Configured for Modulus/Phase.");
 
