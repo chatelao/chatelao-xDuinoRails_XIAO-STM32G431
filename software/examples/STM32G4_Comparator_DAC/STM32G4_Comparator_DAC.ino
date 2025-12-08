@@ -31,7 +31,7 @@
 DAC_HandleTypeDef hdac1;
 COMP_HandleTypeDef hcomp1;
 
-void Error_Handler() {
+void Example_Error_Handler() {
   Serial.println("Error encountered!");
   while(1) {
     delay(100);
@@ -49,7 +49,7 @@ void setup() {
   __HAL_RCC_DAC1_CLK_ENABLE();
 
   hdac1.Instance = DAC1;
-  if (HAL_DAC_Init(&hdac1) != HAL_OK) Error_Handler();
+  if (HAL_DAC_Init(&hdac1) != HAL_OK) Example_Error_Handler();
 
   DAC_ChannelConfTypeDef sConfig = {0};
   sConfig.DAC_HighFrequency = DAC_HIGH_FREQUENCY_INTERFACE_MODE_AUTOMATIC;
@@ -66,14 +66,14 @@ void setup() {
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_ENABLE;
   sConfig.DAC_UserTrimming = DAC_TRIMMING_FACTORY;
 
-  if (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_1) != HAL_OK) Error_Handler();
+  if (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_1) != HAL_OK) Example_Error_Handler();
 
   // Start DAC
-  if (HAL_DAC_Start(&hdac1, DAC_CHANNEL_1) != HAL_OK) Error_Handler();
+  if (HAL_DAC_Start(&hdac1, DAC_CHANNEL_1) != HAL_OK) Example_Error_Handler();
 
   // Set Value: 2048 (Mid-scale). With 3.3V VREF, this is ~1.65V.
   // 12-bit resolution: 0 to 4095.
-  if (HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2048) != HAL_OK) Error_Handler();
+  if (HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2048) != HAL_OK) Example_Error_Handler();
 
   Serial.println("DAC Configured: ~1.65V Internal Reference");
 
@@ -111,10 +111,10 @@ void setup() {
   hcomp1.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
   hcomp1.Init.TriggerMode = COMP_TRIGGERMODE_NONE; // No interrupt, just hardware output
 
-  if (HAL_COMP_Init(&hcomp1) != HAL_OK) Error_Handler();
+  if (HAL_COMP_Init(&hcomp1) != HAL_OK) Example_Error_Handler();
 
   // Start Comparator
-  if (HAL_COMP_Start(&hcomp1) != HAL_OK) Error_Handler();
+  if (HAL_COMP_Start(&hcomp1) != HAL_OK) Example_Error_Handler();
 
   Serial.println("Comparator Started.");
   Serial.println("  In+ : D2 (PA1)");

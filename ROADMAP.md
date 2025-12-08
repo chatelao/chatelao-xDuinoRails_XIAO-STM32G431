@@ -38,3 +38,7 @@ This document outlines the steps to take the XIAO STM32G431 project from its cur
 - [ ] **Upload BOM & CPL**: Upload the generated assembly files.
 - [ ] **Review**: Check the visual preview of the PCBA to ensure parts are rotated correctly.
 - [ ] **Order**: Submit order.
+
+## Software
+- [x] **Arduino Examples**: Created examples for CORDIC (SinCos, Polar), FMAC (FIR), OpAmp (Buffer), and Comparator (DAC).
+- [x] **CI/CD**: Added GitHub Actions workflow (`arduino_build.yml`) to compile Arduino examples on every push.
